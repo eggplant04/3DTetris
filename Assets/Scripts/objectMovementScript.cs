@@ -41,12 +41,54 @@ public class objectMovementScript : MonoBehaviour
             position.y = (Mathf.Round(position.y/5) * 5);
             transform.position = position;
         }
+
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            w();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            s();
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            a();
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            d();
+        }
+        
+
+
     }
 
     void StartMoving()
     {
         isMoving = true;
     }
+    
 
+    void w(){
+        if(!transform.CompareTag("block")){
+            transform.Translate(10f, 0f, 0f);
+        } 
+    }
+    void s(){
+        if(!transform.CompareTag("block")){
+            transform.Translate(-10f, 0f, 0f);
+        }
+    }
+    void a(){
+        if(!transform.CompareTag("block")){
+            transform.Translate(0f, 0f, 10f);
+        }
+    }
+    void d(){
+        if(!transform.CompareTag("block")){
+            transform.Translate(0f, 0f, -10f);
+        }
+    }
     
 }
