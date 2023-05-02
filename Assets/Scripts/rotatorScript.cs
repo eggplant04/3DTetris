@@ -33,17 +33,17 @@ public class rotatorScript : MonoBehaviour
     }
 
     void r(){
-        if(!transform.CompareTag("block")){
+        if(!transform.parent.gameObject.CompareTag("block")){
             transform.Rotate(90f, 0f, 0f, Space.World);
         } 
     }
     void t(){
-        if(!transform.CompareTag("block")){
+        if(!transform.parent.gameObject.CompareTag("block")){
             transform.Rotate(0f, 90f, 0f, Space.World);
         } 
     }
     void y(){
-        if(!transform.CompareTag("block")){
+        if(!transform.parent.gameObject.CompareTag("block")){
             transform.Rotate(0f, 0f, 90f, Space.World);
         } 
     }

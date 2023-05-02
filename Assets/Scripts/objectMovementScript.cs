@@ -12,6 +12,8 @@ public class objectMovementScript : MonoBehaviour
 
     private bool isMoving = false;
 
+    public GameObject DETECTPLANESPrefab;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,12 +36,17 @@ public class objectMovementScript : MonoBehaviour
         }
         
         if (transform.CompareTag("block")){
-            isMoving = false;
+            
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             Vector3 position = transform.position;
             position.y = (Mathf.Round(position.y/5) * 5);
             transform.position = position;
+            if (isMoving){
+                GameObject DETECTPLANES = Instantiate(DETECTPLANESPrefab);
+            }
+            isMoving = false;
+
         }
 
 

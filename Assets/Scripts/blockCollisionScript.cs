@@ -8,7 +8,6 @@ public class blockCollisionScript : MonoBehaviour
     {
         if (other.CompareTag("block")){
             transform.parent.parent.gameObject.tag = "block";
-            Debug.Log("collider activated");
         }
         
     }
