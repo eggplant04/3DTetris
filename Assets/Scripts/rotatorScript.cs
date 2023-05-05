@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class rotatorScript : MonoBehaviour
 {
+    private GameObject blocks;
+
+    void Start(){
+        blocks = GameObject.Find("BLOCKS");
+    }
     void Update()
     {
-        if (transform.parent.CompareTag("block")){
-
-            foreach (Transform child in transform)
-            {
-                child.gameObject.tag = "block";
-            }
-
+        if (transform.parent.CompareTag("block"))
+        {
+            MoveChildrenToTarget();
+            
         }
 
 
@@ -46,5 +48,14 @@ public class rotatorScript : MonoBehaviour
         if(!transform.parent.gameObject.CompareTag("block")){
             transform.Rotate(0f, 0f, 90f, Space.World);
         } 
+    }
+
+    void MoveChildrenToTarget()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.tag = "block";
+            child.SetParent(blocks.transform);
+        }
     }
 }

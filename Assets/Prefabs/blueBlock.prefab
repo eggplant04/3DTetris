@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   moveDelay: 1
-  DETECTPLANESPrefab: {fileID: 3933611763762256039, guid: 42e45e56a6f4c1d41b17a41c939cb044, type: 3}
+  DETECTPLANESPrefab: {fileID: 6769653170261385711, guid: 42e45e56a6f4c1d41b17a41c939cb044, type: 3}
 --- !u!54 &33344179
 Rigidbody:
   m_ObjectHideFlags: 0

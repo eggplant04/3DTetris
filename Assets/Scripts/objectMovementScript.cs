@@ -37,11 +37,7 @@ public class objectMovementScript : MonoBehaviour
         
         if (transform.CompareTag("block")){
             
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            Vector3 position = transform.position;
-            position.y = (Mathf.Round(position.y/5) * 5);
-            transform.position = position;
+            
             if (isMoving){
                 GameObject DETECTPLANES = Instantiate(DETECTPLANESPrefab);
             }
