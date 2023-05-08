@@ -17,6 +17,7 @@ public class rotatorScript : MonoBehaviour
             
         }
 
+        
 
         if (Input.GetKeyDown(KeyCode.R))
         {

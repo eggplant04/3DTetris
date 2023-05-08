@@ -10,6 +10,7 @@ public class detectPlaneScript : MonoBehaviour
 
     void Start(){
         blocks = GameObject.Find("BLOCKS");
+        gameObject.name = "holder";
     }
 
     void OnTriggerEnter(Collider other)
@@ -19,16 +20,20 @@ public class detectPlaneScript : MonoBehaviour
         {
             
             add();
-            if (numOfCollides >= 5)
+            if (numOfCollides >= 25)
             {
+                reset();
                 DestroyAndMoveAllChildren();
-                numOfCollides = 0;
+                
             }
         }
     }
 
     void add(){
         numOfCollides += 1;
+    }
+    void reset(){
+        numOfCollides = 0;
     }
 
     void DestroyAndMoveAllChildren()

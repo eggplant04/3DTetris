@@ -12,10 +12,18 @@ public class objectMovementScript : MonoBehaviour
 
     private bool isMoving = false;
 
+
+    public GameObject object1;
+    public GameObject object2;
+    public GameObject object3;
+
     public GameObject DETECTPLANESPrefab;
+
+    private GameObject objectToDestroy;
 
     void Start()
     {
+        objectToDestroy = GameObject.Find("DETECTPLANES(Clone)");
         rb = GetComponent<Rigidbody>();
         Invoke("StartMoving", moveDelay);
     }
@@ -26,24 +34,44 @@ public class objectMovementScript : MonoBehaviour
 
         if (isMoving)
         {
+
+            if (transform.CompareTag("block")){
+            
+                GameObject DETECTPLANES = Instantiate(DETECTPLANESPrefab);
+            
+                isMoving = false;
+
+                int randomNumber = Random.Range(1, 4);
+        
+                switch (randomNumber)
+                {
+                    case 1:
+                        Instantiate(object1);
+                        break;
+                    case 2:
+                        Instantiate(object2);
+                        break;
+                    case 3:
+                        Instantiate(object3);
+                        break;
+                    default:
+                        Debug.LogError("Invalid random number generated!");
+                        break;
+                }
+
+            }
+
+
             if (Input.GetKey(KeyCode.Space))
             {
-                transform.Translate(0, (-moveSpeed* 3) * Time.deltaTime, 0);
+                transform.Translate(0, (-moveSpeed* 6) * Time.deltaTime, 0);
             }
             else{
                 transform.Translate(0, -moveSpeed * Time.deltaTime, 0);
             }
         }
         
-        if (transform.CompareTag("block")){
-            
-            
-            if (isMoving){
-                GameObject DETECTPLANES = Instantiate(DETECTPLANESPrefab);
-            }
-            isMoving = false;
-
-        }
+        
 
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -70,6 +98,9 @@ public class objectMovementScript : MonoBehaviour
     void StartMoving()
     {
         isMoving = true;
+        if (objectToDestroy != null) {
+                    GameObject.Destroy(objectToDestroy);
+        }
     }
     
 
