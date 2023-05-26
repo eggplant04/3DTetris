@@ -81,11 +81,9 @@ public class gameplayManagerScript : MonoBehaviour
                         }
                     }
                     yLevelToDetect += 10f;
-                    Debug.Log("layer");
                 }
                 else{
                     yLevelToDetect += 10f;
-                    Debug.Log("else");
                 }
                 numOfCollides = 0;
 

@@ -48,10 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   moveDelay: 1
-  object1: {fileID: 5356737076350296675, guid: bf43a4c40588b5b49bad56eb6e113cd1, type: 3}
-  object2: {fileID: 1330158480898905882, guid: d5f06489e32ab164aac6c769a5158cb0, type: 3}
-  object3: {fileID: 1330158480898905882}
-  DETECTPLANESPrefab: {fileID: 6769653170261385711, guid: 42e45e56a6f4c1d41b17a41c939cb044, type: 3}
+  canSpawn: 1
+  isMoving_: 1
 --- !u!54 &33344179
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224,7 +222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2610541316609754992}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -496,3 +494,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de17c3fffbcab9489084d4ce53dc047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasCollided: 0
