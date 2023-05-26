@@ -82,23 +82,88 @@ public class objectMovementScript : MonoBehaviour
 
     void w(){
         if(isMoving_){
-            transform.Translate(10f, 0f, 0f);
+            bool canMove = true;
+            foreach (Transform child in transform)
+            {
+                foreach (Transform grandchild in child)
+                {
+                    Vector3 worldPosition = grandchild.TransformPoint(Vector3.zero);
+                    if (worldPosition.x >= 10){
+                        canMove = false;
+                    }
+                }
+
+            }
+            if (canMove){
+                transform.Translate(10f, 0f, 0f);
+            }
+            
+           
         } 
     }
     void s(){
         if(isMoving_){
-            transform.Translate(-10f, 0f, 0f);
+            bool canMove = true;
+            foreach (Transform child in transform)
+            {
+                foreach (Transform grandchild in child)
+                {
+                    Vector3 worldPosition = grandchild.TransformPoint(Vector3.zero);
+                    if (worldPosition.x <= -10){
+                        canMove = false;
+                    }
+                }
+
+            }
+            if (canMove){
+                transform.Translate(-10f, 0f, 0f);
+            }
+            
         }
     }
     void a(){
         if(isMoving_){
-            transform.Translate(0f, 0f, 10f);
+            bool canMove = true;
+            foreach (Transform child in transform)
+            {
+                foreach (Transform grandchild in child)
+                {
+                    Vector3 worldPosition = grandchild.TransformPoint(Vector3.zero);
+                    if (worldPosition.z >= 10){
+                        canMove = false;
+                    }
+                }
+
+            }
+            if (canMove){
+                transform.Translate(0f, 0f, 10f);
+            }
+            
+            
         }
     }
     void d(){
         if(isMoving_){
-            transform.Translate(0f, 0f, -10f);
+            bool canMove = true;
+            foreach (Transform child in transform)
+            {
+                foreach (Transform grandchild in child)
+                {
+                    Vector3 worldPosition = grandchild.TransformPoint(Vector3.zero);
+                    if (worldPosition.z <= -10){
+                        canMove = false;
+                    }
+                }
+
+            }
+            if (canMove){
+                transform.Translate(0f, 0f, -10f);
+            }
+            
+            
         }
     }
+
+    
     
 }

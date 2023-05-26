@@ -61,7 +61,6 @@ public class gameplayManagerScript : MonoBehaviour
 
                     if (Mathf.Abs(child.position.y - yLevelToDetect) < 0.1f){
                         numOfCollides++;
-                        Debug.Log(numOfCollides);
                     }
                 }
                 if(numOfCollides >= 9){
