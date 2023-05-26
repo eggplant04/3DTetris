@@ -20,7 +20,7 @@ public class detectPlaneScript : MonoBehaviour
         {
             
             add();
-            if (numOfCollides >= 25)
+            if (numOfCollides >= 9)
             {
                 reset();
                 DestroyAndMoveAllChildren();

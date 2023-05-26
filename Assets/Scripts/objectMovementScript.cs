@@ -9,65 +9,47 @@ public class objectMovementScript : MonoBehaviour
     public float moveSpeed = 10f;
     
     public float moveDelay = 3f;
+    
+    public bool canSpawn = true;
 
-    private bool isMoving = false;
+    public bool isMoving_ = true;
 
-
-    public GameObject object1;
-    public GameObject object2;
-    public GameObject object3;
-
-    public GameObject DETECTPLANESPrefab;
-
-    private GameObject objectToDestroy;
+    private gameplayManagerScript myGameplayManagerScript;
 
     void Start()
     {
-        objectToDestroy = GameObject.Find("DETECTPLANES(Clone)");
+        
+        GameObject gameplayManagerObject = GameObject.Find("gameplayManager");
+        myGameplayManagerScript = gameplayManagerObject.GetComponent<gameplayManagerScript>();
+
         rb = GetComponent<Rigidbody>();
-        Invoke("StartMoving", moveDelay);
+        
     }
 
     void Update()
     {
         
 
-        if (isMoving)
+
+
+        if (isMoving_)
         {
 
-            if (transform.CompareTag("block")){
             
-                GameObject DETECTPLANES = Instantiate(DETECTPLANESPrefab);
-            
-                isMoving = false;
-
-                int randomNumber = Random.Range(1, 4);
-        
-                switch (randomNumber)
-                {
-                    case 1:
-                        Instantiate(object1);
-                        break;
-                    case 2:
-                        Instantiate(object2);
-                        break;
-                    case 3:
-                        Instantiate(object3);
-                        break;
-                    default:
-                        Debug.LogError("Invalid random number generated!");
-                        break;
-                }
-
-            }
-
-
             if (Input.GetKey(KeyCode.Space))
             {
                 transform.Translate(0, (-moveSpeed* 6) * Time.deltaTime, 0);
             }
             else{
                 transform.Translate(0, -moveSpeed * Time.deltaTime, 0);
+            }
+        }
+        else
+        {
+            if (canSpawn)
+            {
+                myGameplayManagerScript.spawnBlock();
+                canSpawn = false;
             }
         }
         
@@ -95,32 +77,26 @@ public class objectMovementScript : MonoBehaviour
 
     }
 
-    void StartMoving()
-    {
-        isMoving = true;
-        if (objectToDestroy != null) {
-                    GameObject.Destroy(objectToDestroy);
-        }
-    }
+    
     
 
     void w(){
-        if(!transform.CompareTag("block")){
+        if(isMoving_){
             transform.Translate(10f, 0f, 0f);
         } 
     }
     void s(){
-        if(!transform.CompareTag("block")){
+        if(isMoving_){
             transform.Translate(-10f, 0f, 0f);
         }
     }
     void a(){
-        if(!transform.CompareTag("block")){
+        if(isMoving_){
             transform.Translate(0f, 0f, 10f);
         }
     }
     void d(){
-        if(!transform.CompareTag("block")){
+        if(isMoving_){
             transform.Translate(0f, 0f, -10f);
         }
     }

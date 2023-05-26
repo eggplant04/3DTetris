@@ -6,16 +6,16 @@ public class rotatorScript : MonoBehaviour
 {
     private GameObject blocks;
 
+    public bool hasCollided = false;
+
     void Start(){
         blocks = GameObject.Find("BLOCKS");
     }
+
+
     void Update()
     {
-        if (transform.parent.CompareTag("block"))
-        {
-            MoveChildrenToTarget();
-            
-        }
+        
 
         
 
@@ -51,7 +51,7 @@ public class rotatorScript : MonoBehaviour
         } 
     }
 
-    void MoveChildrenToTarget()
+    public void MoveChildrenToTarget()
     {
         foreach (Transform child in transform)
         {
