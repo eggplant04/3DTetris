@@ -5,7 +5,11 @@ using UnityEngine;
 public class objectMovementScript : MonoBehaviour
 {
 
+    private GameObject blocks;
+
     private Rigidbody rb;
+
+
     public float moveSpeed = 10f;
     
     public float moveDelay = 3f;
@@ -18,7 +22,7 @@ public class objectMovementScript : MonoBehaviour
 
     void Start()
     {
-        
+        blocks = GameObject.Find("BLOCKS");
         GameObject gameplayManagerObject = GameObject.Find("gameplayManager");
         myGameplayManagerScript = gameplayManagerObject.GetComponent<gameplayManagerScript>();
 
@@ -85,11 +89,21 @@ public class objectMovementScript : MonoBehaviour
             bool canMove = true;
             foreach (Transform child in transform)
             {
+                
                 foreach (Transform grandchild in child)
                 {
                     Vector3 worldPosition = grandchild.TransformPoint(Vector3.zero);
                     if (worldPosition.x >= 10){
                         canMove = false;
+                        break;
+                    }
+                    foreach (Transform block in blocks.transform){
+                        if (block.position.z == worldPosition.z && block.position.x == worldPosition.x + 10){
+                            if (Mathf.Abs(Mathf.Abs(block.position.y) - Mathf.Abs(worldPosition.y)) < 10.1f){
+                                canMove = false;
+                                break;
+                            }
+                        }
                     }
                 }
 
@@ -98,7 +112,6 @@ public class objectMovementScript : MonoBehaviour
                 transform.Translate(10f, 0f, 0f);
             }
             
-           
         } 
     }
     void s(){
@@ -111,6 +124,15 @@ public class objectMovementScript : MonoBehaviour
                     Vector3 worldPosition = grandchild.TransformPoint(Vector3.zero);
                     if (worldPosition.x <= -10){
                         canMove = false;
+                        break;
+                    }
+                    foreach (Transform block in blocks.transform){
+                        if (block.position.z == worldPosition.z && block.position.x == worldPosition.x - 10){
+                            if (Mathf.Abs(Mathf.Abs(block.position.y) - Mathf.Abs(worldPosition.y)) < 10.1f){
+                                canMove = false;
+                                break;
+                            }
+                        }
                     }
                 }
 
@@ -131,6 +153,14 @@ public class objectMovementScript : MonoBehaviour
                     Vector3 worldPosition = grandchild.TransformPoint(Vector3.zero);
                     if (worldPosition.z >= 10){
                         canMove = false;
+                    }
+                    foreach (Transform block in blocks.transform){
+                        if (block.position.x == worldPosition.x && block.position.z == worldPosition.z + 10){
+                            if (Mathf.Abs(Mathf.Abs(block.position.y) - Mathf.Abs(worldPosition.y)) < 10.1f){
+                                canMove = false;
+                                break;
+                            }
+                        }
                     }
                 }
 
@@ -153,6 +183,14 @@ public class objectMovementScript : MonoBehaviour
                     if (worldPosition.z <= -10){
                         canMove = false;
                     }
+                    foreach (Transform block in blocks.transform){
+                        if (block.position.x == worldPosition.x && block.position.z == worldPosition.z -10){
+                            if (Mathf.Abs(Mathf.Abs(block.position.y) - Mathf.Abs(worldPosition.y)) < 10.1f){
+                                canMove = false;
+                                break;
+                            }
+                        }
+                    }
                 }
 
             }
@@ -163,7 +201,4 @@ public class objectMovementScript : MonoBehaviour
             
         }
     }
-
-    
-    
 }
