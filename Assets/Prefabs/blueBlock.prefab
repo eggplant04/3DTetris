@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1dfdbf959521d4c8bee02c607b7f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playPauseBTNText: {fileID: 0}
   moveSpeed: 10
   moveDelay: 1
   canSpawn: 1
@@ -349,7 +348,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.49
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2632445460875124784
 MonoBehaviour:
@@ -479,7 +478,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.49
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6163472422420393505
 MonoBehaviour:
@@ -609,7 +608,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.49
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4375514382449667324
 MonoBehaviour:

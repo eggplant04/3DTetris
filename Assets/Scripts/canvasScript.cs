@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class canvasScript : MonoBehaviour
 {
+
+    public int speed = 10;
+
     public TMP_Text playPauseBTNText;
     public string playPauseBTNString;
 
@@ -30,6 +33,8 @@ public class canvasScript : MonoBehaviour
             numOfClears = 0;
             levelLBLTextInt += 1;
             levelLBLText.text = levelLBLTextInt.ToString();
+            audioPlayer.pitch += 0.05f;
+            speed += 5;
         }
     }
 

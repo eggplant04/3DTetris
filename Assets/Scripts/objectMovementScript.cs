@@ -17,7 +17,7 @@ public class objectMovementScript : MonoBehaviour
     private canvasScript myCanvasScript;
 
 
-    public float moveSpeed = 10f;
+    public int moveSpeed = 10;
     public float moveDelay = 3f;
     public bool canSpawn = true;
     public bool isMoving_ = true;
@@ -43,7 +43,9 @@ public class objectMovementScript : MonoBehaviour
     void Update()
     {
         
-
+        if(myCanvasScript.speed != moveSpeed){
+            moveSpeed = myCanvasScript.speed;
+        }
 
         if (myCanvasScript.playPauseBTNString == "PAUSE"){
 
@@ -55,7 +57,12 @@ public class objectMovementScript : MonoBehaviour
                 if (Input.GetKey(KeyCode.Space))
                 {
                     softscore += 1;
-                    transform.Translate(0, (-moveSpeed* 6) * Time.deltaTime, 0);
+                    if (moveSpeed < 60){
+                        transform.Translate(0, (-60) * Time.deltaTime, 0);
+                    }
+                    else{
+                        transform.Translate(0, -moveSpeed * Time.deltaTime, 0);
+                    }
                 }
                 else{
                     
