@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1dfdbf959521d4c8bee02c607b7f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playPauseBTNText: {fileID: 0}
   moveSpeed: 10
   moveDelay: 1
   canSpawn: 1
@@ -966,4 +967,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de17c3fffbcab9489084d4ce53dc047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blocks: {fileID: 0}
   hasCollided: 0
+  GHOSTS: {fileID: 0}

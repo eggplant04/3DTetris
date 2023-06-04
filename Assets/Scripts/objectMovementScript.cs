@@ -2,31 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class objectMovementScript : MonoBehaviour
 {
+
+    
 
     private GameObject blocks;
 
     private Rigidbody rb;
 
+    private gameplayManagerScript myGameplayManagerScript;
+
+    private canvasScript myCanvasScript;
+
 
     public float moveSpeed = 10f;
-    
     public float moveDelay = 3f;
-    
     public bool canSpawn = true;
-
     public bool isMoving_ = true;
 
-    private gameplayManagerScript myGameplayManagerScript;
+    
 
     void Start()
     {
         blocks = GameObject.Find("BLOCKS");
+        
+        rb = GetComponent<Rigidbody>();
+
         GameObject gameplayManagerObject = GameObject.Find("gameplayManager");
         myGameplayManagerScript = gameplayManagerObject.GetComponent<gameplayManagerScript>();
+        
+        GameObject canvasObject = GameObject.Find("Canvas");
+        myCanvasScript = canvasObject.GetComponent<canvasScript>();
 
-        rb = GetComponent<Rigidbody>();
+        
         
     }
 
@@ -35,49 +45,51 @@ public class objectMovementScript : MonoBehaviour
         
 
 
+        if (myCanvasScript.playPauseBTNString == "PAUSE"){
 
-        if (isMoving_)
-        {
-
-            
-            if (Input.GetKey(KeyCode.Space))
+        
+            if (isMoving_ )
             {
-                transform.Translate(0, (-moveSpeed* 6) * Time.deltaTime, 0);
+
+
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    transform.Translate(0, (-moveSpeed* 6) * Time.deltaTime, 0);
+                }
+                else{
+                    transform.Translate(0, -moveSpeed * Time.deltaTime, 0);
+                }
             }
-            else{
-                transform.Translate(0, -moveSpeed * Time.deltaTime, 0);
-            }
-        }
-        else
-        {
-            if (canSpawn)
+            else
             {
-                myGameplayManagerScript.spawnBlock();
-                canSpawn = false;
+                if (canSpawn)
+                {
+                    myGameplayManagerScript.spawnBlock();
+                    canSpawn = false;
+                }
             }
-        }
-        
-        
 
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            w();
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            s();
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            a();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            d();
-        }
-        
 
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                w();
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                s();
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                a();
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                d();
+            }
+        
+        }
 
     }
 
@@ -85,7 +97,7 @@ public class objectMovementScript : MonoBehaviour
     
 
     void w(){
-        if(isMoving_){
+        if(isMoving_ && myCanvasScript.playPauseBTNString == "PAUSE"){
             bool canMove = true;
             foreach (Transform child in transform)
             {
@@ -115,7 +127,7 @@ public class objectMovementScript : MonoBehaviour
         } 
     }
     void s(){
-        if(isMoving_){
+        if(isMoving_ && myCanvasScript.playPauseBTNString == "PAUSE"){
             bool canMove = true;
             foreach (Transform child in transform)
             {
@@ -144,7 +156,7 @@ public class objectMovementScript : MonoBehaviour
         }
     }
     void a(){
-        if(isMoving_){
+        if(isMoving_ && myCanvasScript.playPauseBTNString == "PAUSE"){
             bool canMove = true;
             foreach (Transform child in transform)
             {
@@ -173,7 +185,7 @@ public class objectMovementScript : MonoBehaviour
         }
     }
     void d(){
-        if(isMoving_){
+        if(isMoving_ && myCanvasScript.playPauseBTNString == "PAUSE"){
             bool canMove = true;
             foreach (Transform child in transform)
             {

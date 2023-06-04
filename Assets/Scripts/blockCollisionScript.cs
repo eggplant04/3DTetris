@@ -5,6 +5,8 @@ using UnityEngine;
 public class blockCollisionScript : MonoBehaviour
 {
 
+    private canvasScript myCanvasScript;
+
     private objectMovementScript myObjectMovementScript;
 
     private rotatorScript myRotatorScript;
@@ -21,7 +23,8 @@ public class blockCollisionScript : MonoBehaviour
         GameObject rotatorObject = transform.parent.gameObject;
         myRotatorScript = rotatorObject.GetComponent<rotatorScript>();
 
-        
+        GameObject canvasObject = GameObject.Find("Canvas");
+        myCanvasScript = canvasObject.GetComponent<canvasScript>();
 
         rb = GetComponent<Rigidbody>();
     }
@@ -36,7 +39,7 @@ public class blockCollisionScript : MonoBehaviour
     }
 
     void Update(){
-        if (myRotatorScript.hasCollided){
+        if (myRotatorScript.hasCollided && myCanvasScript.playPauseBTNString == "PAUSE"){
             
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;

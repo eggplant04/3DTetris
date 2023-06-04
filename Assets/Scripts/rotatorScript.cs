@@ -10,10 +10,14 @@ public class rotatorScript : MonoBehaviour
 
     public GameObject GHOSTS;
 
+    private canvasScript myCanvasScript;
+
     void Start(){
         blocks = GameObject.Find("BLOCKS");
         GHOSTS = transform.Find("GHOSTS").gameObject;
 
+        GameObject canvasObject = GameObject.Find("Canvas");
+        myCanvasScript = canvasObject.GetComponent<canvasScript>();
     }
 
 
@@ -42,87 +46,98 @@ public class rotatorScript : MonoBehaviour
     
 
     void r(){
-        bool canMove = true;
+        if (GHOSTS != null && myCanvasScript.playPauseBTNString == "PAUSE"){
 
-        GHOSTS.transform.Rotate(90f, 0f, 0f, Space.World);
-        foreach(Transform ghost in GHOSTS.transform){
-            if(Mathf.Abs(ghost.position.x) > 10.1 || Mathf.Abs(ghost.position.z) > 10.1 || ghost.position.y < 5.1){
-                canMove = false;
-                break;
-            }
+        
+            bool canMove = true;
 
-            foreach (Transform block in blocks.transform){
-                if (Mathf.Abs(block.position.x - ghost.position.x) < 10f && Mathf.Abs(block.position.y - ghost.position.y) < 10f && Mathf.Abs(block.position.z - ghost.position.z) < 10f){
+            GHOSTS.transform.Rotate(90f, 0f, 0f, Space.World);
+            foreach(Transform ghost in GHOSTS.transform){
+                if(Mathf.Abs(ghost.position.x) > 10.1 || Mathf.Abs(ghost.position.z) > 10.1 || ghost.position.y < 5.1){
                     canMove = false;
                     break;
                 }
+
+                foreach (Transform block in blocks.transform){
+                    if (Mathf.Abs(block.position.x - ghost.position.x) < 10f && Mathf.Abs(block.position.y - ghost.position.y) < 10f && Mathf.Abs(block.position.z - ghost.position.z) < 10f){
+                        canMove = false;
+                        break;
+                    }
+                }
+                if (!canMove)
+                {
+                    break;
+                }
+
             }
-            if (!canMove)
-            {
-                break;
+            GHOSTS.transform.Rotate(-90f, 0f, 0f, Space.World);
+            if (canMove){
+                transform.Rotate(90f, 0f, 0f, Space.World);
             }
+
 
         }
-        GHOSTS.transform.Rotate(-90f, 0f, 0f, Space.World);
-        if (canMove){
-            transform.Rotate(90f, 0f, 0f, Space.World);
-        }
-
-
     }
 
     void t(){
-        bool canMove = true;
+        if (GHOSTS != null && myCanvasScript.playPauseBTNString == "PAUSE"){
+            bool canMove = true;
 
-        GHOSTS.transform.Rotate(0f, 90f, 0f, Space.World);
-        foreach(Transform ghost in GHOSTS.transform){
-            if(Mathf.Abs(ghost.position.x) > 10.1 || Mathf.Abs(ghost.position.z) > 10.1 || ghost.position.y < 5.1){
-                canMove = false;
-                break;
-            }
-
-            foreach (Transform block in blocks.transform){
-                if (Mathf.Abs(block.position.x - ghost.position.x) < 10f && Mathf.Abs(block.position.y - ghost.position.y) < 10f && Mathf.Abs(block.position.z - ghost.position.z) < 10f){
+            GHOSTS.transform.Rotate(0f, 90f, 0f, Space.World);
+            foreach(Transform ghost in GHOSTS.transform){
+                if(Mathf.Abs(ghost.position.x) > 10.1 || Mathf.Abs(ghost.position.z) > 10.1 || ghost.position.y < 5.1){
                     canMove = false;
                     break;
                 }
-            }
-            if (!canMove)
-            {
-                break;
-            }
 
-        }
-        GHOSTS.transform.Rotate(0f, -90f, 0f, Space.World);
-        if (canMove){
-            transform.Rotate(0f, 90f, 0f, Space.World);
-        }
+                foreach (Transform block in blocks.transform){
+                    if (Mathf.Abs(block.position.x - ghost.position.x) < 10f && Mathf.Abs(block.position.y - ghost.position.y) < 10f && Mathf.Abs(block.position.z - ghost.position.z) < 10f){
+                        canMove = false;
+                        break;
+                    }
+                }
+                if (!canMove)
+                {
+                    break;
+                }
+
+            }
+            GHOSTS.transform.Rotate(0f, -90f, 0f, Space.World);
+            if (canMove){
+                transform.Rotate(0f, 90f, 0f, Space.World);
+            }
+        }   
     }
+        
     void y(){
-        bool canMove = true;
+        if (GHOSTS != null && myCanvasScript.playPauseBTNString == "PAUSE"){
 
-        GHOSTS.transform.Rotate(0f, 0f, 90f, Space.World);
-        foreach(Transform ghost in GHOSTS.transform){
-            if(Mathf.Abs(ghost.position.x) > 10.1 || Mathf.Abs(ghost.position.z) > 10.1 || ghost.position.y < 5.1){
-                canMove = false;
-                break;
-            }
+        
+            bool canMove = true;
 
-            foreach (Transform block in blocks.transform){
-                if (Mathf.Abs(block.position.x - ghost.position.x) < 10f && Mathf.Abs(block.position.y - ghost.position.y) < 10f && Mathf.Abs(block.position.z - ghost.position.z) < 10.1f){
+            GHOSTS.transform.Rotate(0f, 0f, 90f, Space.World);
+            foreach(Transform ghost in GHOSTS.transform){
+                if(Mathf.Abs(ghost.position.x) > 10.1 || Mathf.Abs(ghost.position.z) > 10.1 || ghost.position.y < 5.1){
                     canMove = false;
                     break;
                 }
-            }
-            if (!canMove)
-            {
-                break;
-            }
 
-        }
-        GHOSTS.transform.Rotate(0f, 0f, -90f, Space.World);
-        if (canMove){
-            transform.Rotate(0f, 0f, 90f, Space.World);
+                foreach (Transform block in blocks.transform){
+                    if (Mathf.Abs(block.position.x - ghost.position.x) < 10f && Mathf.Abs(block.position.y - ghost.position.y) < 10f && Mathf.Abs(block.position.z - ghost.position.z) < 10.1f){
+                        canMove = false;
+                        break;
+                    }
+                }
+                if (!canMove)
+                {
+                    break;
+                }
+
+            }
+            GHOSTS.transform.Rotate(0f, 0f, -90f, Space.World);
+            if (canMove){
+                transform.Rotate(0f, 0f, 90f, Space.World);
+            }
         }
     }
 
@@ -130,7 +145,7 @@ public class rotatorScript : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            if (child != null)
+            if (child != null && myCanvasScript.playPauseBTNString == "PAUSE")
             {
                 if (child.gameObject.name == "GHOSTS")
                 {
