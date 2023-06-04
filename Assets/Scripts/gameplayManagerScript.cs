@@ -12,8 +12,13 @@ public class gameplayManagerScript : MonoBehaviour
 
     private GameObject blocks;
 
+    private canvasScript myCanvasScript;
+
     void Start()
     {
+        GameObject canvasObject = GameObject.Find("Canvas");
+        myCanvasScript = canvasObject.GetComponent<canvasScript>();
+
         blocks = GameObject.Find("BLOCKS");
         spawnBlock();
     }
@@ -64,6 +69,8 @@ public class gameplayManagerScript : MonoBehaviour
                     }
                 }
                 if(numOfCollides >= 9){
+                    myCanvasScript.numOfClears += 1;
+                    myCanvasScript.scoreLBLTextInt += 400;
                     foreach (Transform child in blocks.transform){
 
                         if (Mathf.Abs(child.position.y - yLevelToDetect) < 0.1f){

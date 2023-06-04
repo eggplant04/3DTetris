@@ -6,7 +6,7 @@ using UnityEngine;
 public class objectMovementScript : MonoBehaviour
 {
 
-    
+    private int softscore = 0;
 
     private GameObject blocks;
 
@@ -54,9 +54,11 @@ public class objectMovementScript : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.Space))
                 {
+                    softscore += 1;
                     transform.Translate(0, (-moveSpeed* 6) * Time.deltaTime, 0);
                 }
                 else{
+                    
                     transform.Translate(0, -moveSpeed * Time.deltaTime, 0);
                 }
             }
@@ -64,6 +66,13 @@ public class objectMovementScript : MonoBehaviour
             {
                 if (canSpawn)
                 {
+                    if ((softscore / 20) > 40){
+                        softscore = 40;
+                    }
+                    else{
+                        softscore = softscore / 20;
+                    }
+                    myCanvasScript.scoreLBLTextInt += (softscore + 10);
                     myGameplayManagerScript.spawnBlock();
                     canSpawn = false;
                 }
