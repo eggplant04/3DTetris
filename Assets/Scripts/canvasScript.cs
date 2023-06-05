@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class canvasScript : MonoBehaviour
 {
 
+    public int highScore;
     public int speed = 10;
 
     public TMP_Text playPauseBTNText;
@@ -14,6 +15,8 @@ public class canvasScript : MonoBehaviour
 
     public TMP_Text scoreLBLText;
     public int scoreLBLTextInt = 0;
+
+    public TMP_Text highScoreLBLText;
 
     public TMP_Text levelLBLText;
     public int levelLBLTextInt = 1;
@@ -36,10 +39,20 @@ public class canvasScript : MonoBehaviour
             audioPlayer.pitch += 0.05f;
             speed += 5;
         }
+        if (scoreLBLTextInt > highScore)
+        {
+            highScore = scoreLBLTextInt;
+            highScoreLBLText.text = highScore.ToString();
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
+        }
     }
 
     private void Start()
     {
+
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        highScoreLBLText.text = highScore.ToString();
         boombox = GameObject.Find("BGMusicPlayer");
         audioPlayer = boombox.GetComponent<AudioSource>();
         playPauseBTNString = playPauseBTNText.text;
