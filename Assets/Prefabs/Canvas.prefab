@@ -3004,10 +3004,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615824e0a65d285499696930c0144939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highScore: 0
+  speed: 10
   playPauseBTNText: {fileID: 649253624}
   playPauseBTNString: 
   scoreLBLText: {fileID: 1081039566}
   scoreLBLTextInt: 0
+  highScoreLBLText: {fileID: 2727471734875696816}
   levelLBLText: {fileID: 458097818}
   levelLBLTextInt: 1
   numOfClears: 0

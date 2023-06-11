@@ -32,11 +32,12 @@ public class canvasScript : MonoBehaviour
     private void Update()
     {
         scoreLBLText.text = scoreLBLTextInt.ToString(); 
+        highScoreLBLText.text = highScore.ToString();
         if (numOfClears == 4){
             numOfClears = 0;
             levelLBLTextInt += 1;
             levelLBLText.text = levelLBLTextInt.ToString();
-            audioPlayer.pitch += 0.05f;
+            audioPlayer.pitch += 0.03f;
             speed += 5;
         }
         if (scoreLBLTextInt > highScore)
