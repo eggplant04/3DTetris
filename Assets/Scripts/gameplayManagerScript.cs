@@ -14,12 +14,16 @@ public class gameplayManagerScript : MonoBehaviour
 
     private canvasScript myCanvasScript;
 
+    public int next;
+
     void Start()
     {
         GameObject canvasObject = GameObject.Find("Canvas");
         myCanvasScript = canvasObject.GetComponent<canvasScript>();
 
         blocks = GameObject.Find("BLOCKS");
+
+        next = Random.Range(1, 4);
         
     }
 
@@ -35,7 +39,7 @@ public class gameplayManagerScript : MonoBehaviour
     public void spawnBlock(){
 
         
-        switch (Random.Range(1, 4))
+        switch (next)
         {
             case 1:
                 Instantiate(object1);
@@ -50,7 +54,8 @@ public class gameplayManagerScript : MonoBehaviour
                 Debug.LogError("Invalid random number generated!");
                 break;
         }
-
+        next = Random.Range(1, 4);
+        
 
     }
 

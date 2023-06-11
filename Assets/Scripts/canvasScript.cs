@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class canvasScript : MonoBehaviour
 {
     
+    private gameplayManagerScript myGameplayManagerScript;
+
     public bool needsToSpawn = false;
 
     public int highScore;
@@ -30,6 +32,11 @@ public class canvasScript : MonoBehaviour
     public Image muteBTN; 
     private bool isSprite1Active = true;
     
+    public Sprite BBBSprite;
+    public Sprite BRBSprite;
+    public Sprite BGBSprite;
+    public Image nextBTN;
+
     private GameObject boombox;  
     private AudioSource audioPlayer;
 
@@ -51,16 +58,38 @@ public class canvasScript : MonoBehaviour
             PlayerPrefs.SetInt("HighScore", highScore);
             PlayerPrefs.Save();
         }
+
+        switch (myGameplayManagerScript.next)
+        {
+            case 1://blue
+                nextBTN.sprite = BBBSprite;
+                break;
+            case 2://green
+                nextBTN.sprite = BGBSprite;
+                break;
+            case 3://red
+                nextBTN.sprite = BRBSprite;
+                break;
+            default:
+                Debug.LogError("Invalid random number generated!");
+                break;
+        }
     }
 
     private void Start()
     {
+        GameObject gameplayManagerObject = GameObject.Find("gameplayManager");
+        myGameplayManagerScript = gameplayManagerObject.GetComponent<gameplayManagerScript>();
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         highScoreLBLText.text = highScore.ToString();
+
         boombox = GameObject.Find("BGMusicPlayer");
         audioPlayer = boombox.GetComponent<AudioSource>();
+
         playPauseBTNString = playPauseBTNText.text;
+
+        nextBTN.enabled = false;
     }
 
     public void playPauseBTN()
@@ -69,6 +98,7 @@ public class canvasScript : MonoBehaviour
         {
             playPauseBTNText.text = "PAUSE";
             needsToSpawn = true;
+            nextBTN.enabled = true;
         }
         else
         {
@@ -88,9 +118,11 @@ public class canvasScript : MonoBehaviour
 
     public void onResetBTNPressed()
     {
+        myGameplayManagerScript.next = Random.Range(1, 4);
+
         playPauseBTNText.text = "PLAY";
         playPauseBTNString = playPauseBTNText.text;
-
+        nextBTN.enabled = false;
         speed = 10;
 
         scoreLBLTextInt = 0;
