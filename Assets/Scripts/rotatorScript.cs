@@ -35,10 +35,7 @@ public class rotatorScript : MonoBehaviour
         {
             t();
         }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            y();
-        }
+        
 
 
     }
@@ -109,37 +106,7 @@ public class rotatorScript : MonoBehaviour
         }   
     }
         
-    void y(){
-        if (GHOSTS != null && myCanvasScript.playPauseBTNString == "PAUSE"){
-
-        
-            bool canMove = true;
-
-            GHOSTS.transform.Rotate(0f, 0f, 90f, Space.World);
-            foreach(Transform ghost in GHOSTS.transform){
-                if(Mathf.Abs(ghost.position.x) > 10.1 || Mathf.Abs(ghost.position.z) > 10.1 || ghost.position.y < 5.1){
-                    canMove = false;
-                    break;
-                }
-
-                foreach (Transform block in blocks.transform){
-                    if (Mathf.Abs(block.position.x - ghost.position.x) < 10f && Mathf.Abs(block.position.y - ghost.position.y) < 10f && Mathf.Abs(block.position.z - ghost.position.z) < 10.1f){
-                        canMove = false;
-                        break;
-                    }
-                }
-                if (!canMove)
-                {
-                    break;
-                }
-
-            }
-            GHOSTS.transform.Rotate(0f, 0f, -90f, Space.World);
-            if (canMove){
-                transform.Rotate(0f, 0f, 90f, Space.World);
-            }
-        }
-    }
+    
 
     public void MoveChildrenToTarget()
     {

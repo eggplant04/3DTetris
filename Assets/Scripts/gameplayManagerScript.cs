@@ -20,11 +20,15 @@ public class gameplayManagerScript : MonoBehaviour
         myCanvasScript = canvasObject.GetComponent<canvasScript>();
 
         blocks = GameObject.Find("BLOCKS");
-        spawnBlock();
+        
     }
 
     void Update(){
         detectLayer();
+        if (myCanvasScript.needsToSpawn == true){
+            myCanvasScript.needsToSpawn = false;
+            spawnBlock();
+        }
     }
 
 

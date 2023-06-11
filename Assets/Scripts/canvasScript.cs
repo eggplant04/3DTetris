@@ -6,8 +6,11 @@ using UnityEngine.UI;
 
 public class canvasScript : MonoBehaviour
 {
+    
+    public bool needsToSpawn = false;
 
     public int highScore;
+
     public int speed = 10;
 
     public TMP_Text playPauseBTNText;
@@ -26,6 +29,7 @@ public class canvasScript : MonoBehaviour
     public Sprite sprite2;
     public Image muteBTN; 
     private bool isSprite1Active = true;
+    
     private GameObject boombox;  
     private AudioSource audioPlayer;
 
@@ -64,6 +68,7 @@ public class canvasScript : MonoBehaviour
         if (playPauseBTNText.text == "PLAY")
         {
             playPauseBTNText.text = "PAUSE";
+            needsToSpawn = true;
         }
         else
         {
@@ -79,6 +84,47 @@ public class canvasScript : MonoBehaviour
 
         muteBTN.sprite = isSprite1Active ? sprite1 : sprite2;
         audioPlayer.volume = isSprite1Active ? 1.0f : 0.0f;
+    }
+
+    public void onResetBTNPressed()
+    {
+        playPauseBTNText.text = "PLAY";
+        playPauseBTNString = playPauseBTNText.text;
+
+        speed = 10;
+
+        scoreLBLTextInt = 0;
+
+        levelLBLTextInt = 1;
+        levelLBLText.text = levelLBLTextInt.ToString();
+
+        numOfClears = 0;
+
+        audioPlayer.pitch = 1.0f;
+
+        GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in objects)
+        {
+            if (obj.name.Contains("Block"))
+            {
+                Destroy(obj);
+            }
+        }
+
+        Transform blocks = GameObject.Find("BLOCKS").transform;
+
+        if (blocks != null)
+        {
+            foreach (Transform child in blocks)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        else
+        {
+            Debug.Log("Blocks object not found!");
+        }
     }
 
 }
