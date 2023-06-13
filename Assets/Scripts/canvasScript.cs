@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class canvasScript : MonoBehaviour
 {
     
+    private GameObject blocks;
+    
+
     private gameplayManagerScript myGameplayManagerScript;
 
     public bool needsToSpawn = false;
@@ -17,6 +20,13 @@ public class canvasScript : MonoBehaviour
 
     public TMP_Text playPauseBTNText;
     public string playPauseBTNString;
+
+    public TMP_Text GOHighScore;
+    public TMP_Text GOScore;
+    public TMP_Text GOLevel;
+
+
+    public GameObject gameOverPanel;
 
     public TMP_Text scoreLBLText;
     public int scoreLBLTextInt = 0;
@@ -42,6 +52,14 @@ public class canvasScript : MonoBehaviour
 
     private void Update()
     {
+        if (!gameOverPanel.activeSelf)
+        {
+            GOHighScore.text = highScoreLBLText.text;
+            GOScore.text = scoreLBLText.text;
+            GOLevel.text = levelLBLText.text;
+        }
+        
+
         scoreLBLText.text = scoreLBLTextInt.ToString(); 
         highScoreLBLText.text = highScore.ToString();
         if (numOfClears == 4){
@@ -74,10 +92,19 @@ public class canvasScript : MonoBehaviour
                 Debug.LogError("Invalid random number generated!");
                 break;
         }
+
+        foreach (Transform block in blocks.transform){
+            if(block.position.y >= 75.0f){
+                gameOverPanel.SetActive(true);
+                onResetBTNPressed();
+            }
+        }
     }
 
     private void Start()
     {
+
+        blocks = GameObject.Find("BLOCKS");
         GameObject gameplayManagerObject = GameObject.Find("gameplayManager");
         myGameplayManagerScript = gameplayManagerObject.GetComponent<gameplayManagerScript>();
 
@@ -90,6 +117,9 @@ public class canvasScript : MonoBehaviour
         playPauseBTNString = playPauseBTNText.text;
 
         nextBTN.enabled = false;
+        
+        gameOverPanel.SetActive(false);
+
     }
 
     public void playPauseBTN()
@@ -157,6 +187,10 @@ public class canvasScript : MonoBehaviour
         {
             Debug.Log("Blocks object not found!");
         }
+    }
+
+    public void onBackBTNPressed(){
+        gameOverPanel.SetActive(false);
     }
 
 }
