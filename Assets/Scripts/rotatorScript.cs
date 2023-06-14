@@ -26,14 +26,18 @@ public class rotatorScript : MonoBehaviour
         
 
         
-
-        if (Input.GetKeyDown(KeyCode.R))
+        string rotateXKey = PlayerPrefs.GetString("RotateX", "R");
+        KeyCode rotateXKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), rotateXKey);
+        if (Input.GetKeyDown(rotateXKeyCode))
         {
-            r();
+            rotateX();
         }
-        if (Input.GetKeyDown(KeyCode.T))
+
+        string rotateZKey = PlayerPrefs.GetString("RotateZ", "T");
+        KeyCode rotateZKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), rotateZKey);
+        if (Input.GetKeyDown(rotateZKeyCode))
         {
-            t();
+            rotateZ();
         }
         
 
@@ -42,7 +46,7 @@ public class rotatorScript : MonoBehaviour
 
     
 
-    void r(){
+    void rotateX(){
         if (GHOSTS != null && myCanvasScript.playPauseBTNString == "PAUSE"){
 
         
@@ -76,7 +80,7 @@ public class rotatorScript : MonoBehaviour
         }
     }
 
-    void t(){
+    void rotateZ(){
         if (GHOSTS != null && myCanvasScript.playPauseBTNString == "PAUSE"){
             bool canMove = true;
 

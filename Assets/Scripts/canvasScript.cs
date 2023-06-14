@@ -10,13 +10,6 @@ public class canvasScript : MonoBehaviour
 
 
     //keys-------------------------------------------------------------------
-    public string forward;
-    public string backward;
-    public string left;
-    public string right;
-    public string rotateX;
-    public string rotateZ;
-
     public TMP_InputField forwardTMP;
     public TMP_InputField backwardTMP;
     public TMP_InputField leftTMP;
@@ -24,9 +17,9 @@ public class canvasScript : MonoBehaviour
     public TMP_InputField rotateXTMP;
     public TMP_InputField rotateZTMP;
     //-----------------------------------------------------------------------
+    
     private GameObject blocks;
     
-
     private gameplayManagerScript myGameplayManagerScript;
 
     public bool needsToSpawn = false;
@@ -42,8 +35,11 @@ public class canvasScript : MonoBehaviour
     public TMP_Text GOScore;
     public TMP_Text GOLevel;
 
+    private bool newGame = true;
 
     public GameObject gameOverPanel;
+
+    public GameObject settingsPanel;
 
     public TMP_Text scoreLBLText;
     public int scoreLBLTextInt = 0;
@@ -165,13 +161,16 @@ public class canvasScript : MonoBehaviour
         
         gameOverPanel.SetActive(false);
 
+        settingsPanel.SetActive(false);
+
+        //keys------------------------------------------------------
         forwardTMP.text = PlayerPrefs.GetString("Forward", "W");        
         backwardTMP.text = PlayerPrefs.GetString("Backward", "S");
         leftTMP.text = PlayerPrefs.GetString("Left", "A");
         rightTMP.text = PlayerPrefs.GetString("Right", "D");
         rotateXTMP.text = PlayerPrefs.GetString("RotateX", "R");
-        rotateZTMP.text = PlayerPrefs.GetString("RotateY", "T");
-        
+        rotateZTMP.text = PlayerPrefs.GetString("RotateZ", "T");
+        //----------------------------------------------------------
 
 
     }
@@ -181,7 +180,11 @@ public class canvasScript : MonoBehaviour
         if (playPauseBTNText.text == "PLAY")
         {
             playPauseBTNText.text = "PAUSE";
-            needsToSpawn = true;
+            if (newGame){
+                needsToSpawn = true;
+                newGame = false;
+            }
+            
             nextBTN.enabled = true;
         }
         else
@@ -202,6 +205,7 @@ public class canvasScript : MonoBehaviour
 
     public void onResetBTNPressed()
     {
+        newGame = true;
         myGameplayManagerScript.next = Random.Range(1, 4);
 
         playPauseBTNText.text = "PLAY";
@@ -245,6 +249,14 @@ public class canvasScript : MonoBehaviour
 
     public void onBackBTNPressed(){
         gameOverPanel.SetActive(false);
+    }
+    public void onSettingsBackBTNPressed(){
+        settingsPanel.SetActive(false);
+    }
+    public void onSettingsOpenBTNPressed(){
+        playPauseBTNText.text = "PLAY";
+        playPauseBTNString = playPauseBTNText.text;
+        settingsPanel.SetActive(true);
     }
 
 }
