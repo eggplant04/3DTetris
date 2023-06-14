@@ -7,6 +7,23 @@ using UnityEngine.UI;
 public class canvasScript : MonoBehaviour
 {
     
+
+
+    //keys-------------------------------------------------------------------
+    public string forward;
+    public string backward;
+    public string left;
+    public string right;
+    public string rotateX;
+    public string rotateZ;
+
+    public TMP_InputField forwardTMP;
+    public TMP_InputField backwardTMP;
+    public TMP_InputField leftTMP;
+    public TMP_InputField rightTMP;
+    public TMP_InputField rotateXTMP;
+    public TMP_InputField rotateZTMP;
+    //-----------------------------------------------------------------------
     private GameObject blocks;
     
 
@@ -99,6 +116,34 @@ public class canvasScript : MonoBehaviour
                 onResetBTNPressed();
             }
         }
+
+        //keys------------------------------------
+        if(PlayerPrefs.GetString("Forward", "W") != forwardTMP.text){
+            PlayerPrefs.SetString("Forward", forwardTMP.text.ToUpper());
+            PlayerPrefs.Save();
+        }
+        if(PlayerPrefs.GetString("Backward", "S") != backwardTMP.text){
+            PlayerPrefs.SetString("Backward", backwardTMP.text.ToUpper());
+            PlayerPrefs.Save();
+        }
+        if(PlayerPrefs.GetString("Left", "A") != leftTMP.text){
+            PlayerPrefs.SetString("Left", leftTMP.text.ToUpper());
+            PlayerPrefs.Save();
+        }
+        if(PlayerPrefs.GetString("Right", "D") != rightTMP.text){
+            PlayerPrefs.SetString("Right", rightTMP.text.ToUpper());
+            PlayerPrefs.Save();
+        }
+        if(PlayerPrefs.GetString("RotateX", "R") != rotateXTMP.text){
+            PlayerPrefs.SetString("RotateX", rotateXTMP.text.ToUpper());
+            PlayerPrefs.Save();
+        }
+        if(PlayerPrefs.GetString("RotateZ", "T") != rotateZTMP.text){
+            PlayerPrefs.SetString("RotateZ", rotateZTMP.text.ToUpper());
+            PlayerPrefs.Save();
+        }
+        
+        //----------------------------------------
     }
 
     private void Start()
@@ -119,6 +164,15 @@ public class canvasScript : MonoBehaviour
         nextBTN.enabled = false;
         
         gameOverPanel.SetActive(false);
+
+        forwardTMP.text = PlayerPrefs.GetString("Forward", "W");        
+        backwardTMP.text = PlayerPrefs.GetString("Backward", "S");
+        leftTMP.text = PlayerPrefs.GetString("Left", "A");
+        rightTMP.text = PlayerPrefs.GetString("Right", "D");
+        rotateXTMP.text = PlayerPrefs.GetString("RotateX", "R");
+        rotateZTMP.text = PlayerPrefs.GetString("RotateY", "T");
+        
+
 
     }
 

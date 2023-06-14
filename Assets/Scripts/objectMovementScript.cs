@@ -86,23 +86,37 @@ public class objectMovementScript : MonoBehaviour
             }
 
 
+            
+            string forwardKey = PlayerPrefs.GetString("Forward", "W");
+            KeyCode forwardKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), forwardKey);
 
+            if (Input.GetKeyDown(forwardKeyCode))
+            {
+                forward();
+            }
 
-            if (Input.GetKeyDown(KeyCode.W))
+            string backwardKey = PlayerPrefs.GetString("Backward", "S");
+            KeyCode backwardKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), backwardKey);
+
+            if (Input.GetKeyDown(backwardKeyCode))
             {
-                w();
+                backward();
             }
-            if (Input.GetKeyDown(KeyCode.S))
+
+            string leftKey = PlayerPrefs.GetString("Left", "A");
+            KeyCode leftKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), leftKey);
+
+            if (Input.GetKeyDown(leftKeyCode))
             {
-                s();
+                left();
             }
-            if (Input.GetKeyDown(KeyCode.A))
+
+            string rightKey = PlayerPrefs.GetString("Right", "D");
+            KeyCode rightKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), rightKey);
+
+            if (Input.GetKeyDown(rightKeyCode))
             {
-                a();
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                d();
+                right();
             }
         
         }
@@ -112,7 +126,7 @@ public class objectMovementScript : MonoBehaviour
     
     
 
-    void w(){
+    void forward(){
         if(isMoving_ && myCanvasScript.playPauseBTNString == "PAUSE"){
             bool canMove = true;
             foreach (Transform child in transform)
@@ -142,7 +156,7 @@ public class objectMovementScript : MonoBehaviour
             
         } 
     }
-    void s(){
+    void backward(){
         if(isMoving_ && myCanvasScript.playPauseBTNString == "PAUSE"){
             bool canMove = true;
             foreach (Transform child in transform)
@@ -171,7 +185,7 @@ public class objectMovementScript : MonoBehaviour
             
         }
     }
-    void a(){
+    void left(){
         if(isMoving_ && myCanvasScript.playPauseBTNString == "PAUSE"){
             bool canMove = true;
             foreach (Transform child in transform)
@@ -200,7 +214,7 @@ public class objectMovementScript : MonoBehaviour
             
         }
     }
-    void d(){
+    void right(){
         if(isMoving_ && myCanvasScript.playPauseBTNString == "PAUSE"){
             bool canMove = true;
             foreach (Transform child in transform)
