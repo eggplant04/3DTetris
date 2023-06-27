@@ -6,82 +6,84 @@ using UnityEngine.UI;
 
 public class canvasScript : MonoBehaviour
 {
-    
-
-
-    //keys-------------------------------------------------------------------
+    // References to input fields for keys
     public TMP_InputField forwardTMP;
     public TMP_InputField backwardTMP;
     public TMP_InputField leftTMP;
     public TMP_InputField rightTMP;
     public TMP_InputField rotateXTMP;
     public TMP_InputField rotateZTMP;
-    //-----------------------------------------------------------------------
-    
-    private GameObject blocks;
-    
-    private gameplayManagerScript myGameplayManagerScript;
 
-    public bool needsToSpawn = false;
+    private GameObject blocks; // Reference to the parent object of blocks
 
-    public int highScore;
+    private gameplayManagerScript myGameplayManagerScript; // Reference to the gameplay manager script
 
-    public int speed = 10;
+    public bool needsToSpawn = false; // Flag to determine if a block needs to be spawned
 
-    public TMP_Text playPauseBTNText;
-    public string playPauseBTNString;
+    public int highScore; // High score
 
-    public TMP_Text GOHighScore;
-    public TMP_Text GOScore;
-    public TMP_Text GOLevel;
+    public int speed = 10; // Speed of the game
 
-    private bool newGame = true;
+    public TMP_Text playPauseBTNText; // Text for the play/pause button
+    public string playPauseBTNString; // String value of the play/pause button text
 
-    public GameObject gameOverPanel;
+    public TMP_Text GOHighScore; // Game over high score text
+    public TMP_Text GOScore; // Game over score text
+    public TMP_Text GOLevel; // Game over level text
 
-    public GameObject settingsPanel;
+    private bool newGame = true; // Flag to indicate if it's a new game
 
-    public TMP_Text scoreLBLText;
-    public int scoreLBLTextInt = 0;
+    public GameObject gameOverPanel; // Game over panel
 
-    public TMP_Text highScoreLBLText;
+    public GameObject settingsPanel; // Settings panel
 
-    public TMP_Text levelLBLText;
-    public int levelLBLTextInt = 1;
-    public int numOfClears = 0;
+    public TMP_Text scoreLBLText; // Text for the current score
+    public int scoreLBLTextInt = 0; // Integer value of the current score
 
-    public Sprite sprite1; 
-    public Sprite sprite2;
-    public Image muteBTN; 
-    private bool isSprite1Active = true;
-    
-    public Sprite BBBSprite;
-    public Sprite BRBSprite;
-    public Sprite BGBSprite;
-    public Image nextBTN;
+    public TMP_Text highScoreLBLText; // Text for the high score
 
-    private GameObject boombox;  
-    private AudioSource audioPlayer;
+    public TMP_Text levelLBLText; // Text for the current level
+    public int levelLBLTextInt = 1; // Integer value of the current level
+    public int numOfClears = 0; // Number of cleared layers
+
+    public Sprite sprite1; // Sprite 1 for the mute button
+    public Sprite sprite2; // Sprite 2 for the mute button
+    public Image muteBTN; // Mute button image
+    private bool isSprite1Active = true; // Flag to determine the active sprite
+
+    public Sprite BBBSprite; // Sprite for the blue block
+    public Sprite BRBSprite; // Sprite for the red block
+    public Sprite BGBSprite; // Sprite for the green block
+    public Image nextBTN; // Next block image
+
+    private GameObject boombox; // Reference to the boombox object
+    private AudioSource audioPlayer; // Audio player component
 
     private void Update()
     {
         if (!gameOverPanel.activeSelf)
         {
+            // Update the game over panel with the latest scores and level
             GOHighScore.text = highScoreLBLText.text;
             GOScore.text = scoreLBLText.text;
             GOLevel.text = levelLBLText.text;
         }
-        
 
-        scoreLBLText.text = scoreLBLTextInt.ToString(); 
+        // Update the score and high score text
+        scoreLBLText.text = scoreLBLTextInt.ToString();
         highScoreLBLText.text = highScore.ToString();
-        if (numOfClears == 4){
+
+        // Check if a level has been cleared
+        if (numOfClears == 4)
+        {
             numOfClears = 0;
             levelLBLTextInt += 1;
             levelLBLText.text = levelLBLTextInt.ToString();
             audioPlayer.pitch += 0.03f;
             speed += 5;
         }
+
+        // Update the high score if the current score exceeds it
         if (scoreLBLTextInt > highScore)
         {
             highScore = scoreLBLTextInt;
@@ -90,15 +92,16 @@ public class canvasScript : MonoBehaviour
             PlayerPrefs.Save();
         }
 
+        // Update the next block image based on the next block type
         switch (myGameplayManagerScript.next)
         {
-            case 1://blue
+            case 1: // Blue block
                 nextBTN.sprite = BBBSprite;
                 break;
-            case 2://green
+            case 2: // Green block
                 nextBTN.sprite = BGBSprite;
                 break;
-            case 3://red
+            case 3: // Red block
                 nextBTN.sprite = BRBSprite;
                 break;
             default:
@@ -106,105 +109,118 @@ public class canvasScript : MonoBehaviour
                 break;
         }
 
-        foreach (Transform block in blocks.transform){
-            if(block.position.y >= 75.0f){
+        // Check if any block has reached the top
+        foreach (Transform block in blocks.transform)
+        {
+            if (block.position.y >= 75.0f)
+            {
+                // Game over condition
                 gameOverPanel.SetActive(true);
                 onResetBTNPressed();
             }
         }
 
-        //keys------------------------------------
-        if(PlayerPrefs.GetString("Forward", "W") != forwardTMP.text){
+        // Check if any of the key inputs have been changed
+        // and save the new input values in PlayerPrefs
+        if (PlayerPrefs.GetString("Forward", "W") != forwardTMP.text)
+        {
             PlayerPrefs.SetString("Forward", forwardTMP.text.ToUpper());
             PlayerPrefs.Save();
         }
-        if(PlayerPrefs.GetString("Backward", "S") != backwardTMP.text){
+        if (PlayerPrefs.GetString("Backward", "S") != backwardTMP.text)
+        {
             PlayerPrefs.SetString("Backward", backwardTMP.text.ToUpper());
             PlayerPrefs.Save();
         }
-        if(PlayerPrefs.GetString("Left", "A") != leftTMP.text){
+        if (PlayerPrefs.GetString("Left", "A") != leftTMP.text)
+        {
             PlayerPrefs.SetString("Left", leftTMP.text.ToUpper());
             PlayerPrefs.Save();
         }
-        if(PlayerPrefs.GetString("Right", "D") != rightTMP.text){
+        if (PlayerPrefs.GetString("Right", "D") != rightTMP.text)
+        {
             PlayerPrefs.SetString("Right", rightTMP.text.ToUpper());
             PlayerPrefs.Save();
         }
-        if(PlayerPrefs.GetString("RotateX", "R") != rotateXTMP.text){
+        if (PlayerPrefs.GetString("RotateX", "R") != rotateXTMP.text)
+        {
             PlayerPrefs.SetString("RotateX", rotateXTMP.text.ToUpper());
             PlayerPrefs.Save();
         }
-        if(PlayerPrefs.GetString("RotateZ", "T") != rotateZTMP.text){
+        if (PlayerPrefs.GetString("RotateZ", "T") != rotateZTMP.text)
+        {
             PlayerPrefs.SetString("RotateZ", rotateZTMP.text.ToUpper());
             PlayerPrefs.Save();
         }
-        
-        //----------------------------------------
     }
 
     private void Start()
     {
-
+        // Find the reference to the blocks object and gameplay manager script
         blocks = GameObject.Find("BLOCKS");
         GameObject gameplayManagerObject = GameObject.Find("gameplayManager");
         myGameplayManagerScript = gameplayManagerObject.GetComponent<gameplayManagerScript>();
 
+        // Load the high score from PlayerPrefs and update the high score text
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         highScoreLBLText.text = highScore.ToString();
 
+        // Find the reference to the boombox object and audio player component
         boombox = GameObject.Find("BGMusicPlayer");
         audioPlayer = boombox.GetComponent<AudioSource>();
 
+        // Set the initial state of the play/pause button and next block image
         playPauseBTNString = playPauseBTNText.text;
-
         nextBTN.enabled = false;
-        
-        gameOverPanel.SetActive(false);
 
+        // Deactivate the game over panel and settings panel
+        gameOverPanel.SetActive(false);
         settingsPanel.SetActive(false);
 
-        //keys------------------------------------------------------
-        forwardTMP.text = PlayerPrefs.GetString("Forward", "W");        
+        // Load the key input values from PlayerPrefs and update the input fields
+        forwardTMP.text = PlayerPrefs.GetString("Forward", "W");
         backwardTMP.text = PlayerPrefs.GetString("Backward", "S");
         leftTMP.text = PlayerPrefs.GetString("Left", "A");
         rightTMP.text = PlayerPrefs.GetString("Right", "D");
         rotateXTMP.text = PlayerPrefs.GetString("RotateX", "R");
         rotateZTMP.text = PlayerPrefs.GetString("RotateZ", "T");
-        //----------------------------------------------------------
-
-
     }
 
+    // Play/Pause button action
     public void playPauseBTN()
     {
         if (playPauseBTNText.text == "PLAY")
         {
+            // Start the game if it's a new game
             playPauseBTNText.text = "PAUSE";
-            if (newGame){
+            if (newGame)
+            {
                 needsToSpawn = true;
                 newGame = false;
             }
-            
             nextBTN.enabled = true;
         }
         else
         {
+            // Pause the game
             playPauseBTNText.text = "PLAY";
         }
         playPauseBTNString = playPauseBTNText.text;
     }
 
-    
+    // Mute button action
     public void onMuteBTNPressed()
     {
+        // Toggle between sprite 1 and sprite 2 and adjust the audio volume
         isSprite1Active = !isSprite1Active;
-
         muteBTN.sprite = isSprite1Active ? sprite1 : sprite2;
         audioPlayer.volume = isSprite1Active ? 1.0f : 0.0f;
     }
 
+    // Reset button action
     public void onResetBTNPressed()
     {
+        // Reset the game state and destroy all blocks
         newGame = true;
         myGameplayManagerScript.next = Random.Range(1, 4);
 
@@ -247,16 +263,24 @@ public class canvasScript : MonoBehaviour
         }
     }
 
-    public void onBackBTNPressed(){
+    // Back button action for the game over panel
+    public void onBackBTNPressed()
+    {
         gameOverPanel.SetActive(false);
     }
-    public void onSettingsBackBTNPressed(){
+
+    // Back button action for the settings panel
+    public void onSettingsBackBTNPressed()
+    {
         settingsPanel.SetActive(false);
     }
-    public void onSettingsOpenBTNPressed(){
+
+    // Settings open button action
+    public void onSettingsOpenBTNPressed()
+    {
+        // Open the settings panel
         playPauseBTNText.text = "PLAY";
         playPauseBTNString = playPauseBTNText.text;
         settingsPanel.SetActive(true);
     }
-
 }
