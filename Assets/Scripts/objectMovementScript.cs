@@ -125,13 +125,16 @@ public class objectMovementScript : MonoBehaviour
                     }
                     foreach (Transform block in blocks.transform)
                     {
-                        if (block.position.z == worldPosition.z && block.position.x == worldPosition.x + 10)
+                        
+                        if (Mathf.Abs(block.position.z - worldPosition.z) < 0.001f && Mathf.Abs(block.position.x - (worldPosition.x + 10)) < 0.001f)
                         {
+                                
                             if (Mathf.Abs(block.position.y - worldPosition.y) < 10.1f)
                             {
                                 canMove = false; // Object cannot move forward if there's a block in the way
                                 break;
                             }
+                                                       
                         }
                     }
                 }
@@ -161,7 +164,7 @@ public class objectMovementScript : MonoBehaviour
                     }
                     foreach (Transform block in blocks.transform)
                     {
-                        if (block.position.z == worldPosition.z && block.position.x == worldPosition.x - 10)
+                        if (Mathf.Abs(block.position.z - worldPosition.z) < 0.001f && Mathf.Abs(block.position.x - (worldPosition.x - 10)) < 0.001f)
                         {
                             if (Mathf.Abs(block.position.y - worldPosition.y) < 10.1f)
                             {
