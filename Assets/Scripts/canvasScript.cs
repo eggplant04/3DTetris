@@ -24,8 +24,13 @@ public class canvasScript : MonoBehaviour
 
     public int speed = 10; // Speed of the game
 
+
+    public Image PlayPauseBTN;
+    public Sprite PPSprite1;
+    public Sprite PPSprite2;
     public TMP_Text playPauseBTNText; // Text for the play/pause button
-    public string playPauseBTNString; // String value of the play/pause button text
+    public string playPauseBTNString = "PLAY"; // String value of the play/pause button text
+    private bool isPPSprite1Active = true;
 
     public TMP_Text GOHighScore; // Game over high score text
     public TMP_Text GOScore; // Game over score text
@@ -170,7 +175,7 @@ public class canvasScript : MonoBehaviour
         audioPlayer = boombox.GetComponent<AudioSource>();
 
         // Set the initial state of the play/pause button and next block image
-        playPauseBTNString = playPauseBTNText.text;
+        playPauseBTNText.text = "PLAY";
         nextBTN.enabled = false;
 
         // Deactivate the game over panel and settings panel
@@ -189,6 +194,9 @@ public class canvasScript : MonoBehaviour
     // Play/Pause button action
     public void playPauseBTN()
     {
+        isPPSprite1Active = !isPPSprite1Active;
+        PlayPauseBTN.sprite = isPPSprite1Active ? PPSprite1 : PPSprite2;
+
         if (playPauseBTNText.text == "PLAY")
         {
             // Start the game if it's a new game
@@ -220,6 +228,8 @@ public class canvasScript : MonoBehaviour
     // Reset button action
     public void onResetBTNPressed()
     {
+        PlayPauseBTN.sprite = PPSprite1;
+        isPPSprite1Active = true;
         // Reset the game state and destroy all blocks
         newGame = true;
         myGameplayManagerScript.next = Random.Range(1, 4);
@@ -282,5 +292,9 @@ public class canvasScript : MonoBehaviour
         playPauseBTNText.text = "PLAY";
         playPauseBTNString = playPauseBTNText.text;
         settingsPanel.SetActive(true);
+    }
+
+    public void onquitBTNPressed(){
+        Application.Quit();
     }
 }
