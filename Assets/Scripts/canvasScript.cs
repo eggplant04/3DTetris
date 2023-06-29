@@ -183,12 +183,29 @@ public class canvasScript : MonoBehaviour
         settingsPanel.SetActive(false);
 
         // Load the key input values from PlayerPrefs and update the input fields
-        forwardTMP.text = PlayerPrefs.GetString("Forward", "W");
-        backwardTMP.text = PlayerPrefs.GetString("Backward", "S");
-        leftTMP.text = PlayerPrefs.GetString("Left", "A");
-        rightTMP.text = PlayerPrefs.GetString("Right", "D");
-        rotateXTMP.text = PlayerPrefs.GetString("RotateX", "R");
-        rotateZTMP.text = PlayerPrefs.GetString("RotateZ", "T");
+        if(PlayerPrefs.GetString("Forward", "W") != ""){
+            forwardTMP.text = PlayerPrefs.GetString("Forward", "W");
+        }
+        if(PlayerPrefs.GetString("Backward", "S") != ""){
+            backwardTMP.text = PlayerPrefs.GetString("Backward", "S");
+        }
+        if(PlayerPrefs.GetString("Left", "A") != ""){
+            leftTMP.text = PlayerPrefs.GetString("Left", "A");
+        }
+        if(PlayerPrefs.GetString("Right", "D") != ""){
+            rightTMP.text = PlayerPrefs.GetString("Right", "D");
+        }
+        if(PlayerPrefs.GetString("RotateX", "R") != ""){
+            rotateXTMP.text = PlayerPrefs.GetString("RotateX", "R");
+        }
+        if(PlayerPrefs.GetString("RotateZ", "T") != ""){
+            rotateZTMP.text = PlayerPrefs.GetString("RotateZ", "T");
+        }
+        
+        
+        
+        
+        
     }
 
     // Play/Pause button action
