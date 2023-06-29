@@ -25,12 +25,12 @@ public class canvasScript : MonoBehaviour
     public int speed = 10; // Speed of the game
 
 
-    public Image PlayPauseBTN;
-    public Sprite PPSprite1;
-    public Sprite PPSprite2;
+    public Image PlayPauseBTN; // Reference to Play/Pause button image
+    public Sprite PPSprite1; // Sprite for PLAY button
+    public Sprite PPSprite2; // Sprite for PAUSE button
     public TMP_Text playPauseBTNText; // Text for the play/pause button
     public string playPauseBTNString = "PLAY"; // String value of the play/pause button text
-    private bool isPPSprite1Active = true;
+    private bool isPPSprite1Active = true; //Flag if PPSprite1 is selected
 
     public TMP_Text GOHighScore; // Game over high score text
     public TMP_Text GOScore; // Game over score text
