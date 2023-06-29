@@ -288,6 +288,8 @@ public class canvasScript : MonoBehaviour
     // Settings open button action
     public void onSettingsOpenBTNPressed()
     {
+        PlayPauseBTN.sprite = PPSprite1;
+        isPPSprite1Active = true;
         // Open the settings panel
         playPauseBTNText.text = "PLAY";
         playPauseBTNString = playPauseBTNText.text;
